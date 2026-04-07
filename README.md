@@ -21,3 +21,7 @@ EMAIL=admin_admin@admin.admin
 PASSWORD=adminadmin
 BASE_URL=https://adminadmin.admin 
 ```
+Запуск тестов
+```bash
+pytest .
+```
