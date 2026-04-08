@@ -5,31 +5,26 @@ from playwright.sync_api import sync_playwright
 
 
 @pytest.fixture(scope="session")
-def auth_page(BASE_URL, EMAIL, PASSWORD):
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # лучше False для отладки
-        context = browser.new_context()
-        page = context.new_page()
+def auth_page(BASE_URL, EMAIL, PASSWORD, browser):
+    context = browser.new_context()
+    page = context.new_page()
 
-        # 👉 Открываем страницу логина
-        page.goto(BASE_URL + "/login", wait_until="networkidle")
+    # 👉 Открываем страницу логина
+    page.goto(BASE_URL + "/login", wait_until="networkidle")
 
-        # 👉 Вводим логин / пароль
-        page.fill('input[id="login"]', EMAIL)
-        page.fill('input[id="password"]', PASSWORD)
+    # 👉 Вводим логин / пароль
+    page.fill('input[id="login"]', EMAIL)
+    page.fill('input[id="password"]', PASSWORD)
 
-        # 👉 Нажимаем кнопку входа
-        page.click('button[type="submit"]')
+    # 👉 Нажимаем кнопку входа
+    page.click('button[type="submit"]')
 
-        # 👉 Ждём успешную авторизацию (редирект или элемент)
-        page.wait_for_load_state("networkidle")
-        time.sleep(10)
-        # context.storage_state(path="auth_state.json")
-        # browser.close()
-        yield page
-
-        browser.close()
-
+    # 👉 Ждём успешную авторизацию (редирект или элемент)
+    page.wait_for_load_state("networkidle")
+    time.sleep(10)
+    # context.storage_state(path="auth_state.json")
+    # browser.close()
+    yield page
 
 """@pytest.fixture(scope="function")
 def auth_page():
