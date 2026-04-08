@@ -1,8 +1,7 @@
-import pytest
-from playwright.sync_api import sync_playwright, BrowserContext
+from playwright.sync_api import Page
 
 
-def test_excursions_exist(page: BrowserContext, BASE_URL):
+def test_excursions_exist(page: Page, BASE_URL):
     page.goto(BASE_URL + "/popular", wait_until="networkidle")
     locator = page.locator(
         'text=Интерактивный тур "Ганзейская ярмарка в Великом Новгороде" (в очках дополненной реальности)'
