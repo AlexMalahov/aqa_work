@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 @pytest.fixture(scope="function")
 def page():
     with sync_playwright() as p:
