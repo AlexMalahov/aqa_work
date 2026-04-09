@@ -9,7 +9,7 @@ def test_admin_panel_dashbord(auth_page: Page, BASE_URL):
 
     locator = auth_page.locator("text=Статистика запуска сценариев")
     assert locator.count() == 1, locator.all()
-    
+
     locator = auth_page.locator("text=Самые популярные сценарии")
     assert locator.count() == 1, locator.all()
 

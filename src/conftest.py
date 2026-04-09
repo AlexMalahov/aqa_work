@@ -6,9 +6,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 @pytest.fixture(scope="session", autouse=True)
 def BASE_URL():
     return os.environ["BASE_URL"]
+
 
 @pytest.fixture(scope="session", autouse=True)
 def EMAIL():
@@ -18,6 +20,7 @@ def EMAIL():
 @pytest.fixture(scope="session", autouse=True)
 def PASSWORD():
     return os.environ["PASSWORD"]
+
 
 @pytest.fixture(scope="session")
 def browser():
@@ -32,6 +35,7 @@ def page(browser):
     context = browser.new_context()
     page = context.new_page()
     yield page
+
 
 @pytest.fixture(scope="session")
 def auth_page(BASE_URL, EMAIL, PASSWORD, browser):
